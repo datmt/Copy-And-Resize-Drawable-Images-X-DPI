@@ -3,6 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -14,7 +15,7 @@ import tray.notification.TrayNotification;
 
 import javax.imageio.ImageIO;
 import javax.management.Notification;
-import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,19 @@ public class Controller {
     Hyperlink createdBy;
 
     private Preferences prefs;
+
+    @FXML
+    CheckBox xxhdpiCB;
+
+    @FXML
+    CheckBox xhdpiCB;
+
+    @FXML
+    CheckBox hdpiCB;
+
+    @FXML
+    CheckBox mdpiCB;
+
 
     @FXML
     public TextField folderPathTF;
@@ -123,10 +137,14 @@ public class Controller {
 
             Preferences prefs = getPrefs();
 
-            ImageIO.write(resizeImage(originalImage, type, 144, 144), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xxhdpi/" + imageName)  );
-            ImageIO.write(resizeImage(originalImage, type, 96, 96), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xhdpi/" + imageName)  );
-            ImageIO.write(resizeImage(originalImage, type, 72, 72), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-hdpi/" + imageName)  );
-            ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
+            if (xxhdpiCB.isSelected())
+                ImageIO.write(resizeImage(originalImage, type, 144, 144), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xxhdpi/" + imageName)  );
+            if (xhdpiCB.isSelected())
+                ImageIO.write(resizeImage(originalImage, type, 96, 96), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xhdpi/" + imageName)  );
+            if (hdpiCB.isSelected())
+                ImageIO.write(resizeImage(originalImage, type, 72, 72), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-hdpi/" + imageName)  );
+            if (mdpiCB.isSelected())
+                ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
 
             TrayNotification trayNotification = new TrayNotification();
             trayNotification.setTitle("Success");

@@ -13,10 +13,10 @@
       <TextField fx:id="folderPathTF" promptText="or paste the path here" />
       <Button mnemonicParsing="false" onAction="#selectDrawableFolder" text="Select drawable folder..." />
       <Label text="Copy to the following folders" />
-      <CheckBox mnemonicParsing="false" selected="true" text="xxhdpi (144 x 144)" />
-      <CheckBox mnemonicParsing="false" selected="true" text="xhdpi (96 x96)" />
-      <CheckBox mnemonicParsing="false" selected="true" text="hdpi (72 x 72)" />
-      <CheckBox mnemonicParsing="false" selected="true" text="mdpi (48 x 48)" />
+      <CheckBox mnemonicParsing="false" selected="true" text="xxhdpi (144 x 144)" fx:id="xxhdpiCB" />
+      <CheckBox mnemonicParsing="false" selected="true" text="xhdpi (96 x96)" fx:id="xhdpiCB" />
+      <CheckBox fx:id="hdpiCB" mnemonicParsing="false" selected="true" text="hdpi (72 x 72)" />
+      <CheckBox fx:id="mdpiCB" mnemonicParsing="false" selected="true" text="mdpi (48 x 48)" />
       <Button mnemonicParsing="false" onAction="#selectImageFile" text="Select Image..." />
       <Hyperlink fx:id="createdBy" text="Created by @datmt. The repo is on github" />
       <Hyperlink fx:id="bcLink" text="https://binarycarpenter.com/" />
