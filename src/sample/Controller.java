@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -15,6 +18,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.prefs.Preferences;
 
 public class Controller {
@@ -25,6 +30,12 @@ public class Controller {
     private static final String PREF_NAME = "BC_PREFS_IMAGE_TO_XDPI";
     private static final String FOLDER = "BC_PREFS_IMAGE_TO_XDPI";
 
+    @FXML
+    Hyperlink bcLink;
+
+    @FXML
+    Hyperlink createdBy;
+
     private Preferences prefs;
 
     @FXML
@@ -34,6 +45,33 @@ public class Controller {
     public void initialize()
     {
         folderPathTF.setText(getPrefs().get(FOLDER, ""));
+
+        createdBy.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/datmt/Copy-And-Resize-Drawable-Images-X-DPI"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        bcLink.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://binarycarpenter.com"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
