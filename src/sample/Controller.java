@@ -16,6 +16,7 @@ import tray.notification.TrayNotification;
 import javax.imageio.ImageIO;
 import javax.management.Notification;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
