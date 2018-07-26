@@ -5,8 +5,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 import javax.imageio.ImageIO;
+import javax.management.Notification;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -86,6 +90,11 @@ public class Controller {
             ImageIO.write(resizeImage(originalImage, type, 72, 72), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-hdpi/" + imageName)  );
             ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
 
+            TrayNotification trayNotification = new TrayNotification();
+            trayNotification.setTitle("Success");
+            trayNotification.setMessage("File was resized and copied to the resource folder");
+            trayNotification.setNotificationType(NotificationType.SUCCESS);
+            trayNotification.showAndDismiss(Duration.seconds(2));
 
         } catch (IOException ex)
         {
