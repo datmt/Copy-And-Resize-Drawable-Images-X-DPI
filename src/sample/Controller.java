@@ -118,8 +118,9 @@ public class Controller {
         FileChooser imageChooser = new FileChooser();
         imageChooser.setTitle("Select your image");
         imageChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+
                 );
 
         File imageFile = imageChooser.showOpenDialog(root.getScene().getWindow());
@@ -132,7 +133,7 @@ public class Controller {
         {
 
             BufferedImage originalImage = ImageIO.read(imageFile);
-            int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+            int type = BufferedImage.TYPE_INT_ARGB;
             String imageName = imageFile.getName();
             String imageExtension = imageFile.getName().substring(imageFile.getName().length() - 3);
 
