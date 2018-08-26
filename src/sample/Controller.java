@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 public class Controller {
@@ -116,6 +117,7 @@ public class Controller {
     public void selectImageFile()
     {
         FileChooser imageChooser = new FileChooser();
+
         imageChooser.setTitle("Select your image");
         imageChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG", "*.png"),
@@ -123,41 +125,46 @@ public class Controller {
 
                 );
 
-        File imageFile = imageChooser.showOpenDialog(root.getScene().getWindow());
+        List<File> imageFiles = imageChooser.showOpenMultipleDialog(root.getScene().getWindow());
 
 
-        if (imageFile == null)
+        if (imageFiles == null || imageFiles.size() == 0)
             return;
 
-        try
+
+        for (File singleImage : imageFiles)
         {
+            try
+            {
 
-            BufferedImage originalImage = ImageIO.read(imageFile);
-            int type = BufferedImage.TYPE_INT_ARGB;
-            String imageName = imageFile.getName();
-            String imageExtension = imageFile.getName().substring(imageFile.getName().length() - 3);
+                BufferedImage originalImage = ImageIO.read(singleImage);
+                int type = BufferedImage.TYPE_INT_ARGB;
+                String imageName = singleImage.getName();
+                String imageExtension = singleImage.getName().substring(singleImage.getName().length() - 3);
 
-            Preferences prefs = getPrefs();
+                Preferences prefs = getPrefs();
 
-            if (xxhdpiCB.isSelected())
-                ImageIO.write(resizeImage(originalImage, type, 144, 144), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xxhdpi/" + imageName)  );
-            if (xhdpiCB.isSelected())
-                ImageIO.write(resizeImage(originalImage, type, 96, 96), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xhdpi/" + imageName)  );
-            if (hdpiCB.isSelected())
-                ImageIO.write(resizeImage(originalImage, type, 72, 72), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-hdpi/" + imageName)  );
-            if (mdpiCB.isSelected())
-                ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
+                if (xxhdpiCB.isSelected())
+                    ImageIO.write(resizeImage(originalImage, type, 144, 144), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xxhdpi/" + imageName)  );
+                if (xhdpiCB.isSelected())
+                    ImageIO.write(resizeImage(originalImage, type, 96, 96), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-xhdpi/" + imageName)  );
+                if (hdpiCB.isSelected())
+                    ImageIO.write(resizeImage(originalImage, type, 72, 72), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-hdpi/" + imageName)  );
+                if (mdpiCB.isSelected())
+                    ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
 
-            TrayNotification trayNotification = new TrayNotification();
-            trayNotification.setTitle("Success");
-            trayNotification.setMessage("File was resized and copied to the resource folder");
-            trayNotification.setNotificationType(NotificationType.SUCCESS);
-            trayNotification.showAndDismiss(Duration.seconds(2));
+                TrayNotification trayNotification = new TrayNotification();
+                trayNotification.setTitle("Success");
+                trayNotification.setMessage("File(s) was resized and copied to the resource folder");
+                trayNotification.setNotificationType(NotificationType.SUCCESS);
+                trayNotification.showAndDismiss(Duration.seconds(2));
 
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
         }
+
 
 
 
