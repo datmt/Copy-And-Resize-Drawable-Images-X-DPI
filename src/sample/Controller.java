@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -16,14 +19,18 @@ import tray.notification.TrayNotification;
 import javax.imageio.ImageIO;
 import javax.management.Notification;
 
-import java.awt.*;
+import java.awt.Desktop;
+import java.awt.Graphics2D;
+import java.awt.AlphaComposite;
 import java.awt.image.BufferedImage;
+import java.awt.RenderingHints;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.prefs.Preferences;
+
 
 public class Controller {
 
@@ -36,6 +43,8 @@ public class Controller {
     @FXML
     Hyperlink bcLink;
 
+    @FXML
+    ImageView imageView;
     @FXML
     Hyperlink createdBy;
 
@@ -60,6 +69,20 @@ public class Controller {
     @FXML
     public void initialize()
     {
+        imageView.setImage(new Image("https://binarycarpenter.com/wp-content/uploads/2018/09/bc-logo.png"));
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try
+                {
+                    Desktop.getDesktop().browse(new URI("https://binarycarpenter.com/"));
+                } catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
         folderPathTF.setText(getPrefs().get(FOLDER, ""));
 
         createdBy.setOnAction(new EventHandler<ActionEvent>() {
@@ -136,7 +159,6 @@ public class Controller {
         {
             try
             {
-
                 BufferedImage originalImage = ImageIO.read(singleImage);
                 int type = BufferedImage.TYPE_INT_ARGB;
                 String imageName = singleImage.getName();

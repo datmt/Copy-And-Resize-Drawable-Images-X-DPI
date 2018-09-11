@@ -6,10 +6,12 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="539.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="folderPathTF" promptText="or paste the path here" />
       <Button mnemonicParsing="false" onAction="#selectDrawableFolder" text="Select drawable folder..." />
       <Label text="Copy to the following folders" />
