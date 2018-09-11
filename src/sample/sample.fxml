@@ -12,8 +12,8 @@
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="539.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="folderPathTF" promptText="or paste the path here" />
-      <Button mnemonicParsing="false" onAction="#selectDrawableFolder" text="Select drawable folder..." />
+      <TextField fx:id="folderPathTF" promptText="For example .../app/src/main/res" />
+      <Button mnemonicParsing="false" onAction="#selectDrawableFolder" text="Select the path to your /res folder..." />
       <Label text="Copy to the following folders" />
       <CheckBox mnemonicParsing="false" selected="true" text="xxhdpi (144 x 144)" fx:id="xxhdpiCB" />
       <CheckBox mnemonicParsing="false" selected="true" text="xhdpi (96 x96)" fx:id="xhdpiCB" />
