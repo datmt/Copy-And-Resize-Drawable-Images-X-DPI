@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="539.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="folderPathTF" promptText="For example .../app/src/main/res" />
@@ -20,6 +20,7 @@
       <CheckBox fx:id="hdpiCB" mnemonicParsing="false" selected="true" text="hdpi (72 x 72)" />
       <CheckBox fx:id="mdpiCB" mnemonicParsing="false" selected="true" text="mdpi (48 x 48)" />
       <Button mnemonicParsing="false" onAction="#selectImageFile" text="Select Image..." />
+      <Button mnemonicParsing="false" onAction="#copyImages" text="Copy Images" />
       <Hyperlink fx:id="createdBy" text="Created by @datmt. The repo is on github" />
       <Hyperlink fx:id="bcLink" text="https://binarycarpenter.com/" />
    </children>

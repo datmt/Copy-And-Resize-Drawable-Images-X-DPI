@@ -17,13 +17,8 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 import javax.imageio.ImageIO;
-import javax.management.Notification;
-
-import java.awt.Desktop;
-import java.awt.Graphics2D;
-import java.awt.AlphaComposite;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.RenderingHints;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -61,6 +56,8 @@ public class Controller {
 
     @FXML
     CheckBox mdpiCB;
+
+    List<File> imageFiles;
 
 
     @FXML
@@ -148,9 +145,11 @@ public class Controller {
 
                 );
 
-        List<File> imageFiles = imageChooser.showOpenMultipleDialog(root.getScene().getWindow());
+        imageFiles = imageChooser.showOpenMultipleDialog(root.getScene().getWindow());
 
+    }
 
+    public void copyImages() {
         if (imageFiles == null || imageFiles.size() == 0)
             return;
 
@@ -175,11 +174,7 @@ public class Controller {
                 if (mdpiCB.isSelected())
                     ImageIO.write(resizeImage(originalImage, type, 48, 48), imageExtension, new File(prefs.get(FOLDER, "") + "/drawable-mdpi/" + imageName)  );
 
-                TrayNotification trayNotification = new TrayNotification();
-                trayNotification.setTitle("Success");
-                trayNotification.setMessage("File(s) was resized and copied to the resource folder");
-                trayNotification.setNotificationType(NotificationType.SUCCESS);
-                trayNotification.showAndDismiss(Duration.seconds(2));
+
 
             } catch (IOException ex)
             {
@@ -187,9 +182,11 @@ public class Controller {
             }
         }
 
-
-
-
+        TrayNotification trayNotification = new TrayNotification();
+        trayNotification.setTitle("Success");
+        trayNotification.setMessage("File(s) was resized and copied to the resource folder");
+        trayNotification.setNotificationType(NotificationType.SUCCESS);
+        trayNotification.showAndDismiss(Duration.seconds(2));
     }
 
     private static BufferedImage resizeImage(BufferedImage originalImage, int type, int width, int height){
