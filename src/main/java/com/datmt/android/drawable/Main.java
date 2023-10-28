@@ -1,6 +1,5 @@
-package sample;
+package com.datmt.android.drawable;
 
-import com.aquafx_project.AquaFx;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +10,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ui.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("Copy and resize your images to x-dpi folders");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.show();
-        AquaFx.style();
     }
 
 

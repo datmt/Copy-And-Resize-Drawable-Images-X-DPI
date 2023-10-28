@@ -1,4 +1,4 @@
-package sample;
+package com.datmt.android.drawable;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,9 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -182,11 +179,6 @@ public class Controller {
             }
         }
 
-        TrayNotification trayNotification = new TrayNotification();
-        trayNotification.setTitle("Success");
-        trayNotification.setMessage("File(s) was resized and copied to the resource folder");
-        trayNotification.setNotificationType(NotificationType.SUCCESS);
-        trayNotification.showAndDismiss(Duration.seconds(2));
     }
 
     private static BufferedImage resizeImage(BufferedImage originalImage, int type, int width, int height){
